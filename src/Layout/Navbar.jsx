@@ -13,6 +13,9 @@ const Navbar = () => {
       <Link to="/rq-superHero" className="p-4">
         RQsuperHero
       </Link>
+      <Link to="/mysuperhero" className="p-4">
+        Mysuperhero
+      </Link>
     </div>
   );
 };

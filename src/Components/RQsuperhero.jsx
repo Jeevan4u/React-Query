@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
-import API from "../Api/API";
-
-const fetchSuperHero = () => {
-  return API.get("/SuperHeros");
-};
+import { useSuperHeroData } from "../hooks/useSuperHeroData";
 
 const RQsuperhero = () => {
   const [refetchTime, setrefetchTime] = useState(3000);
+  const queryParam = "RQsuperhero";
+  const toggle = true;
   const onSuccess = (data) => {
     if (data.length === 4) {
       setrefetchTime(false);
@@ -20,18 +17,12 @@ const RQsuperhero = () => {
       setrefetchTime(false);
     }
   };
-  const { isLoading, data, isError, error, isFetching } = useQuery(
-    "FetchRQsuperHero",
-    fetchSuperHero,
-    {
-      refetchInterval: refetchTime,
-      onSuccess,
-      onError,
-      select: (data) => {
-        const superHeroNames = data.data.map((hero) => hero.name);
-        return superHeroNames;
-      },
-    }
+  const { isLoading, data, isError, error, isFetching } = useSuperHeroData(
+    onSuccess,
+    onError,
+    queryParam,
+    toggle,
+    refetchTime
   );
   return (
     <div className="">
