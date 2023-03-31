@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import API from "../Api/API";
 
@@ -8,17 +8,35 @@ const fetchSuperHero = () => {
 };
 
 const RQsuperhero = () => {
-  const { isLoading, data, isError, error, refetch } = useQuery(
+  const [refetchTime, setrefetchTime] = useState(3000);
+  const onSuccess = (data) => {
+    if (data.length === 4) {
+      setrefetchTime(false);
+    }
+  };
+
+  const onError = (error) => {
+    if (error) {
+      setrefetchTime(false);
+    }
+  };
+  const { isLoading, data, isError, error, isFetching } = useQuery(
     "FetchRQsuperHero",
     fetchSuperHero,
     {
-      enabled: false,
+      refetchInterval: refetchTime,
+      onSuccess,
+      onError,
+      select: (data) => {
+        const superHeroNames = data.data.map((hero) => hero.name);
+        return superHeroNames;
+      },
     }
   );
   return (
     <div className="">
       RQsuperhero :
-      {isLoading ? (
+      {/* {isLoading || isFetching ? (
         <h1>Loading . . .</h1>
       ) : (
         <div className="Superhero_list">
@@ -26,11 +44,13 @@ const RQsuperhero = () => {
             return <div key={heros.id}>{heros.name} </div>;
           })}
         </div>
-      )}
+      )} */}
+      {isLoading || (isFetching && <h1>Loading ....</h1>)}
       {isError && <h1>{error.message}</h1>}
-      <button className="p-4 rounded-lg bg-green-600" onClick={refetch}>
-        Fetch Super Hero
-      </button>
+      {data?.map((heroname) => {
+        return <h1 key={heroname}>{heroname}</h1>;
+      })}
+      <button className="p-4 rounded-lg bg-green-600">Fetch Super Hero</button>
     </div>
   );
 };
