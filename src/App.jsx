@@ -6,6 +6,7 @@ import RQsuperhero from "./Components/RQsuperhero";
 import Superhero from "./Components/Superhero";
 import Navbar from "./Layout/Navbar";
 import Mysuperhero from "./Components/Mysuperhero";
+import Rqsuperheropage from "./Components/Rqsuperhero.page";
 const queryClient = new QueryClient();
 
 function App() {
@@ -13,14 +14,19 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <div className="App w-screen h-screen bg-slate-300">
-          <h1 className="text-[40px]">
+          {/* <h1 className="text-[40px]">
             <Navbar />
-          </h1>
+          </h1> */}
           <Routes>
-            <Route path="/" element={<Home />} index="/" />
-            <Route path="/superhero" element={<Superhero />} />
-            <Route path="/rq-superHero" element={<RQsuperhero />} />
-            <Route path="/mysuperhero" element={<Mysuperhero />} />
+            <Route path="/" element={<Navbar />}>
+              <Route path="/" index element={<Home />} />
+              <Route path="superhero" element={<Superhero />} />
+              <Route path="rq-superHero">
+                <Route index element={<RQsuperhero />} />
+                <Route path="/rq-superHero/:id" element={<Rqsuperheropage />} />
+              </Route>
+              <Route path="/mysuperhero" element={<Mysuperhero />} />
+            </Route>
           </Routes>
         </div>
       </BrowserRouter>
