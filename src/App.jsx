@@ -7,6 +7,9 @@ import Superhero from "./Components/Superhero";
 import Navbar from "./Layout/Navbar";
 import Mysuperhero from "./Components/Mysuperhero";
 import Rqsuperheropage from "./Components/Rqsuperhero.page";
+import Rq_Parallel from "./Components/Rq_Parallel";
+import DynamicParallel from "./Components/DynamicParallel";
+import DependentQuery from "./Components/DependentQuery";
 const queryClient = new QueryClient();
 
 function App() {
@@ -26,6 +29,15 @@ function App() {
                 <Route path="/rq-superHero/:id" element={<Rqsuperheropage />} />
               </Route>
               <Route path="/mysuperhero" element={<Mysuperhero />} />
+              <Route path="/rq-parallel" element={<Rq_Parallel />} />
+              <Route
+                path="/rq-dependent"
+                element={<DependentQuery email={"jeevankarki31@gmail.com"} />}
+              />
+              <Route
+                path="/rq-dynamic"
+                element={<DynamicParallel heroIds={[1, 3, 4]} />}
+              />
             </Route>
           </Routes>
         </div>

@@ -20,7 +20,7 @@ const Mysuperhero = () => {
     <div>
       <div className="">
         Mysuperhero :
-        {isLoading || isFetching ? (
+        {isLoading ? (
           <h1>Loading . . .</h1>
         ) : (
           <div className="Superhero_list">

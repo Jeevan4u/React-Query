@@ -2,8 +2,8 @@ import React from 'react'
 import API from "../Api/API";
 import { useQuery } from "react-query";
 
-const fetchSuperHero = () => {
-    return API.get("/SuperHeros");
+const fetchSuperHero = async() => {
+    return await API.get("/SuperHeros");
   };
 export const useSuperHeroData = (onSuccess,onError,queryParam,toggle,refetchTime) => {
   return  useQuery(

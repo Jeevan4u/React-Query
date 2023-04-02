@@ -7,12 +7,12 @@ const Rqsuperheropage = () => {
   const { isLoading, data, isFetching } = useRQsuperHeroData(id);
   return (
     <div>
-      {isLoading || isFetching ? (
+      {isLoading ? (
         <h1>Loading . . .</h1>
       ) : (
         <div className="Superhero_list">
           <h1>
-            {data?.data.name} ============ {data?.data.alterEgo}
+            {data?.data?.name} ============ {data?.data?.alterEgo}
           </h1>
         </div>
       )}
