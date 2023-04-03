@@ -1,30 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { useSuperHeroData } from "../hooks/useSuperHeroData";
+import {
+  useAddsuperHeroData,
+  useSuperHeroData,
+} from "../hooks/useSuperHeroData";
 
 const RQsuperhero = () => {
   const [refetchTime, setrefetchTime] = useState(3000);
-  const queryParam = "RQsuperhero";
+  const [name, setName] = useState();
+  const [alterEgo, setAlterEgo] = useState();
   const toggle = true;
-  const onSuccess = (data) => {
-    if (data.data.length === 4) {
-      setrefetchTime(false);
-    }
-  };
 
-  const onError = (error) => {
-    if (error) {
-      setrefetchTime(false);
-    }
-  };
-  const { isLoading, data, isError, error, isFetching } = useSuperHeroData(
-    onSuccess,
-    onError,
-    queryParam,
-    toggle,
-    refetchTime
-  );
+  const { isLoading, data, isError, error, isFetching } =
+    useSuperHeroData(toggle);
+
+  const { mutate } = useAddsuperHeroData();
   return (
     <div className="">
       RQsuperhero :
@@ -32,6 +23,41 @@ const RQsuperhero = () => {
         <h1>Loading . . .</h1>
       ) : (
         <div className="Superhero_list">
+          <form action="">
+            <div className="heroName">
+              <label htmlFor="Name">HeroName</label>
+              <input
+                type="text"
+                placeholder="HeroName"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                defaultValue={name}
+              />
+            </div>
+            <div className="heroAlterEgo">
+              <label htmlFor="Ego">AlterEgo</label>
+              <input
+                type="text"
+                placeholder="AlterEgo"
+                onChange={(e) => {
+                  setAlterEgo(e.target.value);
+                }}
+                defaultValue={alterEgo}
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-green-500 p-4 rounded-lg m-4"
+              onClick={(e) => {
+                e.preventDefault();
+                const hero = { name, alterEgo };
+                mutate(hero);
+              }}
+            >
+              Submit
+            </button>
+          </form>
           {data?.data.map((heros) => {
             return (
               <div key={heros.id} className="my-2">

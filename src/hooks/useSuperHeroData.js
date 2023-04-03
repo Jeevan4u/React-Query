@@ -1,18 +1,21 @@
 import React from 'react'
 import API from "../Api/API";
-import { useQuery } from "react-query";
+import { useQuery ,useMutation,useQueryClient} from "react-query";
 
 const fetchSuperHero = async() => {
     return await API.get("/SuperHeros");
   };
-export const useSuperHeroData = (onSuccess,onError,queryParam,toggle,refetchTime) => {
+
+const postSuperhero = async(heros)=>{
+  return await API.post(`/SuperHeros`,heros)
+}
+export const useSuperHeroData = (onSuccess,onError,toggle) => {
   return  useQuery(
-        `${queryParam}`,
+        'RQsuperhero',
         fetchSuperHero,
         {
-          refetchInterval: refetchTime ? refetchTime : false,
-          onSuccess,
-          onError,
+          
+        
           // select: (data) => {
           //   const superHeroNames = data.data.map((hero) => hero.name);
           //   return superHeroNames;
@@ -22,5 +25,19 @@ export const useSuperHeroData = (onSuccess,onError,queryParam,toggle,refetchTime
           enabled: toggle
         }
       );
+}
+
+export const useAddsuperHeroData = () => {
+  const queryClient = useQueryClient()
+    return useMutation(postSuperhero,{
+      onSuccess : (data)=>{
+        //  queryClient.invalidateQueries('RQsuperhero')
+        queryClient.setQueriesData('RQsuperhero',(oldQueryData)=>{
+          return {
+            ...oldQueryData, data : [...oldQueryData.data,data.data]
+          }
+        })
+      }
+    })
 }
 

@@ -1,14 +1,54 @@
 {
   "SuperHeros": [
-    { "id": 1, "name": "Batman", "alterEgo": "Bruce Wayne" },
-    { "id": 2, "name": "Superman", "alterEgo": "Clark Kent" },
-    { "id": 3, "name": "Wonder Woman ", "alterEgo": "Princess Diana" },
-    { "id": 4, "name": "The Flash ", "alterEgo": "Barry Alan" }
+    {
+      "id": 1,
+      "name": "Batman",
+      "alterEgo": "Bruce Wayne"
+    },
+    {
+      "id": 2,
+      "name": "Superman",
+      "alterEgo": "Clark Kent"
+    },
+    {
+      "id": 3,
+      "name": "Wonder Woman ",
+      "alterEgo": "Princess Diana"
+    },
+    {
+      "id": 4,
+      "name": "The Flash ",
+      "alterEgo": "Barry Alan"
+    },
+    {
+      "name": "Mememe",
+      "alterEgo": "asdasdsa",
+      "id": 5
+    },
+    {
+      "name": "sasdasdasd",
+      "alterEgo": "asdadssa",
+      "id": 6
+    },
+    {
+      "name": "Meh",
+      "alterEgo": "asdadssa",
+      "id": 7
+    }
   ],
   "Freinds": [
-    { "id": 1, "name": "Chandler Bing" },
-    { "id": 2, "name": "Joey Tribbiani" },
-    { "id": 3, "name": "Rachel Green" }
+    {
+      "id": 1,
+      "name": "Chandler Bing"
+    },
+    {
+      "id": 2,
+      "name": "Joey Tribbiani"
+    },
+    {
+      "id": 3,
+      "name": "Rachel Green"
+    }
   ],
   "users": [
     {
@@ -16,11 +56,14 @@
       "channelid": "lanaya"
     }
   ],
-
   "channels": [
     {
       "id": "lanaya",
-      "courses": ["react", "vue", "angular"]
+      "courses": [
+        "react",
+        "vue",
+        "angular"
+      ]
     }
   ]
 }
